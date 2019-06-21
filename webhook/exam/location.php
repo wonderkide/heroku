@@ -13,6 +13,7 @@ use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
 use LINE\LINEBot\MessageBuilder\LocationMessageBuilder;
 use LINE\LINEBot\MessageBuilder\MultiMessageBuilder;
 use LINE\LINEBot;
+use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 
 $idPush = 'U433d8f17c86125016456c828eecb4381';
 
@@ -32,7 +33,7 @@ $latitude = 13.780401863217657;
 $longitude = 100.61141967773438;
 $locationMessage = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);        
 
-$multiMessage =     new MultiMessageBuilder;
+$multiMessage = new MultiMessageBuilder;
 $multiMessage->add($textMessage);
 $multiMessage->add($imageMessage);
 $multiMessage->add($locationMessage);
