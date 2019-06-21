@@ -39,9 +39,9 @@ class UriTemplateActionBuilder implements TemplateActionBuilder
      * @param string $label Label of action.
      * @param string $uri URI of the link.
      */
-    public function __construct($uri)
+    public function __construct($label, $uri)
     {
-        
+        $this->label = $label;
         $this->uri = $uri;
     }
 
@@ -54,7 +54,7 @@ class UriTemplateActionBuilder implements TemplateActionBuilder
     {
         return [
             'type' => ActionType::URI,
-            
+            'label' => $this->label,
             'uri' => $this->uri,
         ];
     }

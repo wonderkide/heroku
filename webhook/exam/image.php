@@ -20,7 +20,7 @@ $replyData = new TemplateMessageBuilder('Image Carousel',
                     'https://simple-line-bot-test-api.herokuapp.com/webhook/exam/sample.jpg',
                     new UriTemplateActionBuilder(
                         '', // ข้อความแสดงในปุ่ม
-                        'https://www.google.com'
+                        'https://ligaz888club.com'
                     )
                 ),                       
             )
