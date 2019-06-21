@@ -27,9 +27,13 @@ if (!is_null($events['events'])) {
 				'type' => 'text',
 				'text' => 'UserID:'.$text.', Group:'.$group.', Room:'.$room
 			];
+                        
+                        writeLog($text, 'user');
+                        writeLog($group, 'group');
+                        writeLog($room, 'room');
 
 			// Make a POST Request to Messaging API to reply to sender
-			$url = 'https://api.line.me/v2/bot/message/reply';
+			/*$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
 				'replyToken' => $replyToken,
 				'messages' => [$messages],
@@ -46,8 +50,27 @@ if (!is_null($events['events'])) {
 			$result = curl_exec($ch);
 			curl_close($ch);
 
-			echo $result . "\r\n";
+			echo $result . "\r\n";*/
 		}
 	}
 }
+function writeLog($text, $type){
+    $strFileName = $type.".txt";
+    $objFopen = fopen($strFileName, 'w');
+
+    fwrite($objFopen, $text);
+
+    if($objFopen)
+    {
+        echo "File writed.";
+    }
+
+    else
+    {
+        echo "File can not write";
+    }
+    fclose($objFopen);
+}
+
+
 echo "OK";
