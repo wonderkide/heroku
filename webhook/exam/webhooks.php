@@ -17,13 +17,15 @@ if (!is_null($events['events'])) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
 			$text = $event['source']['userId'];
+                        $group = $event['source']['groupId'];
+                        $room = $event['source']['room'];
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => $text
+				'text' => 'UserID:'.$text.', Group:'.$group.', Room:'.$room
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
