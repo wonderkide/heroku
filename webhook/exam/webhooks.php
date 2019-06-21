@@ -18,7 +18,7 @@ if (!is_null($events['events'])) {
 			// Get text sent
 			$text = $event['source']['userId'];
                         $group = $event['source']['groupId'];
-                        $room = $event['source']['room'];
+                        $room = $event['source']['roomId'];
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
