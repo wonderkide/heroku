@@ -19,7 +19,7 @@ $replyData = new TemplateMessageBuilder('Image Carousel',
                 new ImageCarouselColumnTemplateBuilder(
                     'https://simple-line-bot-test-api.herokuapp.com/webhook/exam/sample.jpg',
                     new UriTemplateActionBuilder(
-                        'Uri Template', // ข้อความแสดงในปุ่ม
+                        '', // ข้อความแสดงในปุ่ม
                         'https://www.google.com'
                     )
                 ),                       
