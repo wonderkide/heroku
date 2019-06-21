@@ -1,6 +1,14 @@
 <?php
 
 require "vendor/autoload.php";
+
+use LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
+use LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder;
+use LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder;
+
 $access_token = 'qvQckpPL0EbDkJC1xU3T0sT+sr7MRks2yK48ApMDH8il8ZmyYV9huFBJOdvlVZMa8O0cziiS51ZiUdzRRBJpZQllAgSLN6ln6+YhmaDHWvyDNq/rto0PZbE263pQD5C7x7/F2JZqA0Dcib0fOFJTIQdB04t89/1O/w1cDnyilFU=';
 $channelSecret = '234c26728e0c47f150cbf4ed83de57de';
 $idPush = 'U433d8f17c86125016456c828eecb4381';
@@ -9,14 +17,14 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $channelSecret]);
 //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello world');
 //$response = $bot->pushMessage($idPush, $textMessageBuilder);
 
-$actionBuilder = array(
+/*$actionBuilder = array(
         new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder(
             'Message Template',// ข้อความแสดงในปุ่ม
             'This is Text' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
         ),
         new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder(
             'Uri Template', // ข้อความแสดงในปุ่ม
-            'https://www.ninenik.com'
+            'https://www.google.com'
         ),
         new \LINE\LINEBot\TemplateActionBuilder\DatetimePickerTemplateActionBuilder(
             'Datetime Picker', // ข้อความแสดงในปุ่ม
@@ -45,6 +53,52 @@ $actionBuilder = array(
                 'Please select', // กำหนดรายละเอียด
                 $imageUrl, // กำหนด url รุปภาพ
                 $actionBuilder  // กำหนด action object
+        )
+    );
+    
+    */
+    
+    $actionBuilder = array(
+        new MessageTemplateActionBuilder(
+            'Message Template',// ข้อความแสดงในปุ่ม
+            'This is Text' // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+        ),
+        new UriTemplateActionBuilder(
+            'Uri Template', // ข้อความแสดงในปุ่ม
+            'https://www.google.com'
+        ),
+        new PostbackTemplateActionBuilder(
+            'Postback', // ข้อความแสดงในปุ่ม
+            http_build_query(array(
+                'action'=>'buy',
+ 
+                'item'=>100
+            )), // ข้อมูลที่จะส่งไปใน webhook ผ่าน postback event
+            'Postback Text'  // ข้อความที่จะแสดงฝั่งผู้ใช้ เมื่อคลิกเลือก
+        ),      
+    );
+    $replyData = new TemplateMessageBuilder('Carousel',
+        new CarouselTemplateBuilder(
+            array(
+                new CarouselColumnTemplateBuilder(
+                    'Title Carousel',
+                    'Description Carousel',
+                    'https://simple-line-bot-test-api.herokuapp.com/webhook/exam/sample.jpg',
+                    $actionBuilder
+                ),
+                new CarouselColumnTemplateBuilder(
+                    'Title Carousel',
+                    'Description Carousel',
+                    'https://simple-line-bot-test-api.herokuapp.com/webhook/exam/sample.jpg',
+                    $actionBuilder
+                ),
+                new CarouselColumnTemplateBuilder(
+                    'Title Carousel',
+                    'Description Carousel',
+                    'https://simple-line-bot-test-api.herokuapp.com/webhook/exam/sample.jpg',
+                    $actionBuilder
+                ),                                          
+            )
         )
     );
 $response = $bot->pushMessage($idPush, $replyData);
